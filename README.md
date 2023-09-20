@@ -7,11 +7,12 @@ Monolithic / microservice architecture
 
 Technologies:
 .NET 7, 
+SQL Server,
+EF Core,
 AutoMapper,
 Testcontainers, 
 Fluent Validation, 
-EF Core, 
-SQL Server,
+XUnit,
 Docker,
 Docker-compose.
 
