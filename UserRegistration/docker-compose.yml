@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql-container
+    environment:
+      - SA_PASSWORD=CLient@2023
+      - ACCEPT_EULA=Y   
+
+
+  userregistration.api:
+    image: ${DOCKER_REGISTRY-}userregistrationapi
+    container_name: userregistration-api
+    build:
+      context: .
+      dockerfile: UserRegistration.API/Dockerfile
+    environment: 
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS= https://+:443 ;http://+:80
+    ports:
+       - "80"
+       - "443"
+    depends_on:
+       - sqldata
