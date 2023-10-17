@@ -1,9 +1,22 @@
 name: dockercompose6799564595176489868
 services:
+  sqldata:
+    container_name: mssql-container
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: CLient@2023
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
   userregistration.api:
     build:
       context: C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration
       dockerfile: UserRegistration.API/Dockerfile
+    container_name: userregistration-api
+    depends_on:
+      sqldata:
+        condition: service_started
+        required: true
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:443;http://+:80

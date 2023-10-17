@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace UserRegistration.UserRegistrationUnitTest.    ;
+namespace UserRegistration.UserRegistrationUnitTest.Utils;
 public static class UtilPrivateMethods
 {
     public static TReturn CallPrivateMethod<TReturn>(this object instance, string methodName, params object[] parameters)
