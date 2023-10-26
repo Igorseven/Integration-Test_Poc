@@ -1,16 +1,16 @@
 ﻿namespace UserRegistrationIntegrationTest.EndPoints.Settings;
-public abstract class BaseIntegrationTest<T> : IClassFixture<IntegrationTestWebAppFactory<T>> where T : class
+public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory> 
 {
     protected readonly HttpClient _httpClient;
-    protected readonly IntegrationTestWebAppFactory<T> _factory;
+    protected readonly IntegrationTestWebAppFactory _factory;
     private string _userId = "2";
 
-    public BaseIntegrationTest(IntegrationTestWebAppFactory<T> factory)
+    public BaseIntegrationTest(IntegrationTestWebAppFactory factory)
     {
         _factory = factory;
         _factory.DefaultUserId = _userId;
         _httpClient = _factory.CreateClient();
     }
 
-    protected void SetUserid(string id) => _userId = id;
+    protected void SetUserId(string id) => _userId = id;
 }

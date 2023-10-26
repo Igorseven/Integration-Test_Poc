@@ -1,25 +1,28 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Requests.ClientRequest;
+using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Responses.ClientResponse;
 using UserRegistration.API.Business.Domain.Enums;
 using UserRegistrationIntegrationTest.EndPoints.Settings;
 
 namespace UserRegistrationIntegrationTest.EndPoints.ClientControllerIntegrationTest;
-public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTest
+public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTest
 {
+
+    private const string _endPointGetUrl = "api/Client/get_all_clients";
     private const string _endPointPostUrl = "api/Client/register_client";
 
-    public ClientRegisterAsyncMethodIntegrationTest(IntegrationTestWebAppFactory factory)
+    public GetAllClientsAsyncMethodIntegrationTest(IntegrationTestWebAppFactory factory) 
         : base(factory)
     {
-        SetUserId("10"); // Se necessário gerar uma auth fake.
     }
 
     [Fact]
-    [Trait("OK", "Perfect setting")]
-    public async Task ClientRegisterAsync_PerfectSetting_ReturnStatusCodeOK()
+    [Trait("OK", "Return dto data response list")]
+    public async Task GetAllClientsAsync_ReturnClientDataResponseList()
     {
-        var dtoRegister = new ClientRegisterRequest
+        var dtoRegisterOne = new ClientRegisterRequest
         {
             FullName = "Tester test",
             Addresses = new()
@@ -63,32 +66,21 @@ public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTe
                 }
             }
         };
+        await _httpClient.PostAsJsonAsync(_endPointPostUrl, dtoRegisterOne);
 
-        var ExpectedStatusCodeResponse = HttpStatusCode.OK;
-
-        var httpResponse = await _httpClient.PostAsJsonAsync(_endPointPostUrl, dtoRegister);
-
-        Assert.Equal(ExpectedStatusCodeResponse, httpResponse.StatusCode);
-    }
-
-
-    [Fact]
-    [Trait("BadRequest", "Invalid data")]
-    public async Task ClientRegisterAsync_InvalidData_ReturnStatusCodeBadRequest()
-    {
-        var dtoRegister = new ClientRegisterRequest
+        var dtoRegisterTwo = new ClientRegisterRequest
         {
-            FullName = "T",
+            FullName = "Tester test",
             Addresses = new()
             {
                 new()
                 {
-                    Country = "Country",
+                    Country = "Country Two",
                     State = "SP",
-                    City = "C",
-                    Localization = "Localization",
-                    District = "District",
-                    Complement = "Complement",
+                    City = "City Two",
+                    Localization = "Localization Two",
+                    District = "District Two",
+                    Complement = "Complement Two",
                     Number = "185A",
                     ZipCode = "80009000",
                     AddressType = EAddressType.MainProperty,
@@ -99,7 +91,7 @@ public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTe
                 new()
                 {
                     EmailType = EEmailType.Main,
-                    Email = "Tester@test.com"
+                    Email = "TesterTwo@test.com"
                 }
             },
             Phones = new()
@@ -109,7 +101,7 @@ public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTe
                     TelephoneType = ETelephoneType.CellPhone,
                     Ddi = "+55",
                     Ddd = "18",
-                    PhoneNumber = "91177-6532"
+                    PhoneNumber = "91177-2222"
                 },
                 new()
                 {
@@ -120,13 +112,32 @@ public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTe
                 }
             }
         };
+        await _httpClient.PostAsJsonAsync(_endPointPostUrl, dtoRegisterTwo);
 
-        var ExpectedStatusCodeResponse = HttpStatusCode.BadRequest;
+        var ExpectedStatusCodeResponse = HttpStatusCode.OK;
+        var response = await _httpClient.GetAsync(_endPointGetUrl);
+        var content = await response.Content.ReadAsStringAsync();
+        var clientDtoResponse = JsonConvert.DeserializeObject<IEnumerable<ClientDataResponse>>(content);
 
-        var httpResponse = await _httpClient.PostAsJsonAsync(_endPointPostUrl, dtoRegister);
-
-        Assert.Equal(ExpectedStatusCodeResponse, httpResponse.StatusCode);
+        Assert.Equal(ExpectedStatusCodeResponse, response.StatusCode);
+        Assert.NotEmpty(clientDtoResponse!);
     }
+
+
+    [Fact]
+    [Trait("OK", "Return empty list")]
+    public async Task GetAllClientsAsync_ReturnEmptyList()
+    {
+
+        var ExpectedStatusCodeResponse = HttpStatusCode.OK;
+        var response = await _httpClient.GetAsync(_endPointGetUrl);
+        var content = await response.Content.ReadAsStringAsync();
+        var clientDtoResponse = JsonConvert.DeserializeObject<IEnumerable<ClientDataResponse>>(content);
+
+        Assert.Equal(ExpectedStatusCodeResponse, response.StatusCode);
+        Assert.Empty(clientDtoResponse!);
+    }
+
 
 
 }

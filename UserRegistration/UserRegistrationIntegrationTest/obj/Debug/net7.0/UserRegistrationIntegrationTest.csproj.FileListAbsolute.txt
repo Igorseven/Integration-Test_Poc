@@ -318,7 +318,6 @@ C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\Use
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Docker.DotNet.dll
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Docker.DotNet.X509.dll
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\FluentValidation.dll
-C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Testing.dll
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\Microsoft.AspNetCore.TestHost.dll
@@ -465,4 +464,3 @@ C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\Use
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\obj\Debug\net7.0\UserRegistrationIntegrationTest.pdb
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\obj\Debug\net7.0\UserRegistrationIntegrationTest.genruntimeconfig.cache
 C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\obj\Debug\net7.0\ref\UserRegistrationIntegrationTest.dll
-C:\Users\Igor Seven\Documents\Net7\Integration-Test_Poc\Integration-Test_Poc\UserRegistration\UserRegistrationIntegrationTest\bin\Debug\net7.0\WebMotions.Fake.Authentication.JwtBearer.dll

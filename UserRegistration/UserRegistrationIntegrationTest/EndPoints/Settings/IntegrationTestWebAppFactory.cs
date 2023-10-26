@@ -8,18 +8,16 @@ using Testcontainers.MsSql;
 using UserRegistration.API.Business.Insfrastructure.ORM.Context;
 
 namespace UserRegistrationIntegrationTest.EndPoints.Settings;
-public class IntegrationTestWebAppFactory<T> : WebApplicationFactory<Program>, IAsyncLifetime where T : class
+public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private readonly List<T> _seedingObjects = new();
     private readonly MsSqlContainer _dbContainer;
     public string DefaultUserId { get; set; } = "1";
 
     public IntegrationTestWebAppFactory()
     {
         _dbContainer = new MsSqlBuilder().WithImage("mcr.microsoft.com/mssql/server:2019-latest")
-                                         .WithPortBinding(8080, true)
                                          .WithEnvironment("-e", "MSSQL_PID=Express")
-                                         .WithPassword("yourStrong(!)Password")
+                                         .WithPassword("test@2023")
                                          .WithName("SqlServer-IntegrationTest")
                                          .Build();
     }
@@ -30,6 +28,7 @@ public class IntegrationTestWebAppFactory<T> : WebApplicationFactory<Program>, I
 
         builder.ConfigureTestServices(services =>
         {
+
             services.Configure<TestAuthHandlerOptions>(options => options.DefaultUserId = DefaultUserId);
 
             services.AddAuthentication(TestAuthHandler.AuthenticationScheme)
@@ -44,11 +43,6 @@ public class IntegrationTestWebAppFactory<T> : WebApplicationFactory<Program>, I
         });
     }
 
-    public void CreateSeeding(List<T> objects)
-    {
-        _seedingObjects.AddRange(objects);
-    }
-
     public async Task InitializeAsync()
     {
         await _dbContainer.StartAsync();
@@ -58,9 +52,6 @@ public class IntegrationTestWebAppFactory<T> : WebApplicationFactory<Program>, I
         var scopeServices = scope.ServiceProvider;
 
         var context = scopeServices.GetRequiredService<ApplicationContext>();
-
-        //await context.Set<T>.AddRangeAsync(_seedingObjects);
-        //await context.SaveChangesAsync();
 
         await context.Database.EnsureCreatedAsync();
     }
