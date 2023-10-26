@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace UserRegistrationIntegrationTest.EndPoints.Settings;
+namespace UserRegistrationIntegrationTest.Settings;
 public class TestAuthHandler : AuthenticationHandler<TestAuthHandlerOptions>
 {
     public const string UserId = "UserId";
@@ -14,7 +14,7 @@ public class TestAuthHandler : AuthenticationHandler<TestAuthHandlerOptions>
     public TestAuthHandler(IOptionsMonitor<TestAuthHandlerOptions> options,
                            ILoggerFactory logger,
                            UrlEncoder encoder,
-                           ISystemClock clock) 
+                           ISystemClock clock)
         : base(options, logger, encoder, clock)
     {
         _defaultUserId = options.CurrentValue.DefaultUserId;

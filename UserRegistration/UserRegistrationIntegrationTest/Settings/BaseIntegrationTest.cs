@@ -1,5 +1,5 @@
-﻿namespace UserRegistrationIntegrationTest.EndPoints.Settings;
-public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory> 
+﻿namespace UserRegistrationIntegrationTest.Settings;
+public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>
 {
     protected readonly HttpClient _httpClient;
     protected readonly IntegrationTestWebAppFactory _factory;

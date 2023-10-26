@@ -7,21 +7,19 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.MsSql;
 using UserRegistration.API.Business.Insfrastructure.ORM.Context;
 
-namespace UserRegistrationIntegrationTest.EndPoints.Settings;
+namespace UserRegistrationIntegrationTest.Settings;
 public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private readonly MsSqlContainer _dbContainer;
     public string DefaultUserId { get; set; } = "1";
+    private readonly MsSqlContainer _dbContainer = new MsSqlBuilder().WithImage("mcr.microsoft.com/mssql/server:2019-latest")
+                                                                     .WithEnvironment("-e", "MSSQL_PID=Express")
+                                                                     .WithPassword("test@2023")
+                                                                     .Build();
 
     public IntegrationTestWebAppFactory()
     {
-        _dbContainer = new MsSqlBuilder().WithImage("mcr.microsoft.com/mssql/server:2019-latest")
-                                         .WithEnvironment("-e", "MSSQL_PID=Express")
-                                         .WithPassword("test@2023")
-                                         .WithName("SqlServer-IntegrationTest")
-                                         .Build();
     }
-    
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         base.ConfigureWebHost(builder);

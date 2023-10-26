@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Requests.ClientRequest;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Responses.ClientResponse;
 using UserRegistration.API.Business.Domain.Enums;
-using UserRegistrationIntegrationTest.EndPoints.Settings;
+using UserRegistrationIntegrationTest.Settings;
 
 namespace UserRegistrationIntegrationTest.EndPoints.ClientControllerIntegrationTest;
 public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTest
@@ -24,7 +24,7 @@ public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTes
     {
         var dtoRegisterOne = new ClientRegisterRequest
         {
-            FullName = "Tester test",
+            FullName = "Tester test Get all",
             Addresses = new()
             {
                 new()
@@ -45,7 +45,7 @@ public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTes
                 new()
                 {
                     EmailType = EEmailType.Main,
-                    Email = "Tester@test.com"
+                    Email = "TesterGetAll@test.com"
                 }
             },
             Phones = new()
@@ -70,7 +70,7 @@ public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTes
 
         var dtoRegisterTwo = new ClientRegisterRequest
         {
-            FullName = "Tester test",
+            FullName = "Tester test Get all two",
             Addresses = new()
             {
                 new()
@@ -91,7 +91,7 @@ public sealed class GetAllClientsAsyncMethodIntegrationTest : BaseIntegrationTes
                 new()
                 {
                     EmailType = EEmailType.Main,
-                    Email = "TesterTwo@test.com"
+                    Email = "TesterGetAllTwo@test.com"
                 }
             },
             Phones = new()

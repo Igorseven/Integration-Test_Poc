@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Requests.ClientRequest;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Responses.ClientResponse;
 using UserRegistration.API.Business.Domain.Enums;
-using UserRegistrationIntegrationTest.EndPoints.Settings;
+using UserRegistrationIntegrationTest.Settings;
 
 namespace UserRegistrationIntegrationTest.EndPoints.ClientControllerIntegrationTest;
 public sealed class GetClientWithEmailAndMainAddressAsyncMethodIntegrationTest : BaseIntegrationTest
@@ -25,7 +25,7 @@ public sealed class GetClientWithEmailAndMainAddressAsyncMethodIntegrationTest :
     {
         var dtoRegister = new ClientRegisterRequest
         {
-            FullName = "Tester test",
+            FullName = "Tester test Get",
             Addresses = new()
             {
                 new()
@@ -46,7 +46,7 @@ public sealed class GetClientWithEmailAndMainAddressAsyncMethodIntegrationTest :
                 new()
                 {
                     EmailType = EEmailType.Main,
-                    Email = "Tester@test.com"
+                    Email = "TesterGetBy@test.com"
                 }
             },
             Phones = new()
@@ -85,7 +85,7 @@ public sealed class GetClientWithEmailAndMainAddressAsyncMethodIntegrationTest :
     public async Task GetClientWithEmailAndMainAddressAsync_ReturnNull()
     {
 
-        const string clientId = "1";
+        const string clientId = "99";
         var ExpectedStatusCodeResponse = HttpStatusCode.NoContent;
         var response = await _httpClient.GetAsync(_endPointGetUrl + clientId);
         var content = await response.Content.ReadAsStringAsync();

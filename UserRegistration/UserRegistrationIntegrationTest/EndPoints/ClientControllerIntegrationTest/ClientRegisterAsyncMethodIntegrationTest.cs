@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using UserRegistration.API.Business.ApplicationService.DataTransferObjects.Requests.ClientRequest;
 using UserRegistration.API.Business.Domain.Enums;
-using UserRegistrationIntegrationTest.EndPoints.Settings;
+using UserRegistrationIntegrationTest.Settings;
 
 namespace UserRegistrationIntegrationTest.EndPoints.ClientControllerIntegrationTest;
 public sealed class ClientRegisterAsyncMethodIntegrationTest : BaseIntegrationTest
